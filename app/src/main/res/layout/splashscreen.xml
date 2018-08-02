@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash">
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp">
+
+        <ImageView
+            android:layout_width="250dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/logo"/>
+
+
+        <ImageView
+            android:layout_above="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/fastest"/>
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:paddingBottom="20dp"
+            android:layout_alignParentBottom="true"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit,dolor sit amet,"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

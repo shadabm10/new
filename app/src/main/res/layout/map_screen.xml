@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+    <fragment
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/map"
+        tools:context=".MapScreen"
+        android:name="com.google.android.gms.maps.SupportMapFragment"/>
+
+
+    <TextView
+        android:id="@+id/tv_show_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/img_marker"
+
+        android:gravity="center"
+        android:background="@android:drawable/sym_action_chat"
+        android:textColor="@color/black"
+        android:padding="10dp"/>
+    <ImageView
+        android:id="@+id/img_marker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/pin_green_centre"
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:id="@+id/tv_done"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/blue_bg_tv"
+        android:text="@string/done"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:textSize="18sp"
+        android:textColor="@color/colorPrimary"
+        android:padding="10dp"/>
+</RelativeLayout>

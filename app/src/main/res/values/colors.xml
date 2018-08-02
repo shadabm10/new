@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#187ee3</color>
+    <color name="colorAccent">#0865c1</color>
+
+    <color name="white">#ffffff</color>
+    <color name="black">#030303</color>
+    <color name="light_grey">#EEF0F1</color>
+    <color name="dark_blue">#0865c1</color>
+    <color name="green">#45bc53</color>
+    <color name="blue_chat_box">#cee1ea</color>
+    <color name="white_chat_box">#ebebeb</color>
+
+    <color name="main_cal_bg">#05324f</color>
+    <color name="upcoming_date">#379245</color>
+    <color name="passed_date">#226f9c</color>
+    <color name="month_bg">#50375b72</color>
+    <color name="opacity_dark">#20ffffff</color>
+    <color name="dark_grey">#353535</color>
+    <color name="red">#fc1b47</color>
+    <color name="dark_red">#ed5656</color>
+    <color name="grey">#C3C4C5</color>
+    <color name="pressed_color_tv">#eaeef1</color>
+    <color name="yellow_tv">#f7bb1c</color>
+
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorGrey">#747474</color>
+    <color name="grey_border">#D6D6D6</color>
+    <color name="track_blue">#1081e0</color>
+    <color name="track_orange">#f7914d</color>
+</resources>

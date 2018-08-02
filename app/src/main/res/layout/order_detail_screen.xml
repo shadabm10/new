@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@drawable/header">
+
+
+
+        <ImageView
+            android:id="@+id/toolbar_back"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@mipmap/back"
+            android:padding="7dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="start"
+            android:layout_centerVertical="true"
+            />
+
+
+
+        <ImageView
+            android:id="@+id/toolbar_logo"
+            android:layout_width="180dp"
+            android:layout_height="?actionBarSize"
+            android:layout_gravity="center"
+            android:src="@mipmap/logo"
+            android:layout_centerInParent="true"
+            android:padding="10dp"
+
+            android:layout_marginRight="10dp"
+            />
+
+
+        <ImageView
+            android:id="@+id/toolbar_profile"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@mipmap/user"
+            android:padding="7dp"
+            android:layout_gravity="end"
+            android:layout_marginRight="10dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            />
+
+
+
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:padding="20dp"
+                android:orientation="vertical"
+                android:background="@drawable/stroke_grey">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <TextView
+                        android:layout_toLeftOf="@+id/price_tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Order Id : 7834567"
+                        android:layout_marginRight="10dp"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/dark_grey" />
+
+                    <TextView
+                        android:id="@+id/price_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$600"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/green" />
+
+                </RelativeLayout>
+
+
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 20 - 06 - 2018, 10:00 AM"
+                    android:gravity="center_vertical"
+                    android:textSize="14sp"
+                    android:drawableLeft="@mipmap/date"
+                    android:layout_marginTop="5dp"
+                    />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed. "
+                    android:gravity="center_vertical"
+                    android:textSize="14sp"
+                    android:layout_marginTop="5dp"
+                    />
+
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View More..."
+                    android:gravity="center_vertical"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:layout_marginTop="10dp"
+                    />
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Job Status"
+                    android:gravity="center_horizontal"
+                    android:textSize="14sp"
+                    android:layout_marginTop="10dp"
+                    />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="#ffffff"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"
+                    android:padding="10dp">
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:gravity="left"
+                        android:background="@drawable/customround"
+                        android:layout_marginTop="4dp"
+
+                        />
+                    <View android:id="@+id/pin_code"
+                        android:background="@color/track_blue"
+                        android:layout_width = "100dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_height="1dip"
+                        />
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:gravity="left"
+                        android:background="@drawable/customround"
+                        android:layout_marginTop="4dp"
+
+
+                        />
+                    <View android:id="@+id/code1"
+                        android:background="@color/track_blue"
+                        android:layout_width = "100dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_height="1dip"
+                        />
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:gravity="left"
+                        android:layout_marginLeft="-3dp"
+                        android:layout_marginTop="2dp"
+                        android:tint="@color/track_blue"
+                        android:src="@mipmap/pickuplocation"
+                        />
+
+
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="20dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/img_pic_loc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/pickuplocation"/>
+
+                        <TextView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Pickup Location"
+                            android:layout_toRightOf="@+id/img_pic_loc"
+                            android:textStyle="bold"
+                            android:layout_marginLeft="10dp"
+
+                            android:layout_centerVertical="true"
+                            android:textSize="16sp"
+                            android:textColor="@color/dark_grey"
+
+                            />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/light_grey"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+                        <ImageView
+                            android:id="@+id/img_dil_loc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/delivery_location"/>
+
+                        <TextView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Pickup Location"
+                            android:layout_toRightOf="@+id/img_dil_loc"
+                            android:textStyle="bold"
+                            android:layout_marginLeft="10dp"
+
+                            android:layout_centerVertical="true"
+                            android:textSize="16sp"
+                            android:textColor="@color/dark_grey"
+
+                            />
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:padding="10dp"
+                android:orientation="vertical"
+                android:background="@drawable/stroke_grey"
+                >
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Rate Delivery Boy"
+
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_centerVertical="true"
+                    android:textSize="20sp"
+                    android:textColor="@color/dark_grey"
+
+                    />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <RatingBar
+                        android:id="@+id/rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="?android:attr/ratingBarStyle"
+                        android:numStars="5"
+                        android:stepSize="1"
+                        android:layout_centerHorizontal="true"
+                        android:isIndicator="true" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:padding="10dp"
+                android:orientation="vertical"
+                android:background="@drawable/stroke_grey"
+                >
+
+                <TextView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Rate Delivery Boy"
+
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_centerVertical="true"
+                    android:textSize="20sp"
+                    android:textColor="@color/dark_grey"
+
+                    />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <RatingBar
+                        android:id="@+id/rating1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="?android:attr/ratingBarStyle"
+                        android:numStars="5"
+                        android:stepSize="1"
+                        android:layout_centerHorizontal="true"
+                        android:isIndicator="true" />
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

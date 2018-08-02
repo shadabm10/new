@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="10dp">
+
+
+    <TextView
+        android:id="@+id/tv_place_order"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Place Order"
+        android:textSize="16sp"
+        android:padding="20dp"
+        android:background="@drawable/frame_bg"
+        android:gravity="center"
+        android:textColor="@color/black" />
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Statistics"
+        android:textSize="16sp"
+        android:padding="20dp"
+        android:gravity="center"
+        android:textColor="@color/black" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/orange_bg"
+            android:padding="20dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/img_order_placed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/order_placed"/>
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Number of order Placed"
+                android:textSize="12sp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/img_order_placed"
+
+                android:gravity="start"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="00.00"
+            android:textSize="20sp"
+            android:padding="20dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:textStyle="bold"
+            android:background="@drawable/frame_bg"
+            android:gravity="center"
+            android:textColor="@color/grey" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+
+        android:orientation="horizontal">
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="00.00"
+            android:textSize="20sp"
+            android:padding="20dp"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/frame_bg"
+            android:gravity="center"
+            android:textColor="@color/grey" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/green_bg"
+            android:padding="20dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/img_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/order_delivered"/>
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Number of order Delivered"
+                android:textSize="12sp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/img_order"
+
+                android:gravity="start"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_bg"
+            android:padding="20dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/img_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/rating"/>
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Number of  rating given"
+                android:textSize="12sp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/img_rating"
+
+                android:gravity="start"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="00.00"
+            android:textSize="20sp"
+            android:padding="20dp"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:background="@drawable/frame_bg"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/grey" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

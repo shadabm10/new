@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">Gopher App</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="GOOGLE_MAPS_API_KEY">AIzaSyD4FS-ZAKH9m4sIok9G_RbP_WOtZoPIRe0</string>
+    <string name="GEO_CODE_API_KEY">AIzaSyD6sz1rz21RLdiYM6cuvzqVVXwcZtPeItE</string>
+
+    <string name="select_option">Select Option</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="choose_from_gallery">Choose From Gallery</string>
+    <string name="cancel">Cancel</string>
+    <string name="camera_permission_error">Camera Permission error</string>
+    <string name="profile_pic_updated">Your profile picture has been updated.</string>
+    <string name="profile_updated">Your profile  has been updated.</string>
+    <string name="check_internet">Please check your internet connection.</string>
+    <string name="done">Done</string>
+
+
+    <string name="enable_gps">Your GPS seems to be disabled, do you want to enable it?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="location_permission">This app needs the Location permission, please accept to use location functionality</string>
+    <string name="location_permission_needed">Location Permission Needed</string>
+    <string name="permission_denied">permission denied</string>
+    <string name="ok">OK</string>
+
+    <string name="otp_send">OTP has been sent to your registered email id.</string>
+    <string name="not_registered_user">You are not a registered user.</string>
+    <string name="f_pass">Forgot Password</string>
+
+    <string name="submit">Submit</string>
+    <string name="renter_password">Please renter the new password.</string>
+    <string name="enter_new_password">Please enter the new password.</string>
+    <string name="enter_code">Please enter the code.</string>
+    <string name="wrong_otp">Wrong OTP.</string>
+    <string name="password_changed">Password changed successfully.</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="sent_code">We have sent the code to your registered email.</string>
+    <string name="enter_code_here">Enter Code</string>
+    <string name="new_password">New password</string>
+    <string name="old_password">Old password</string>
+    <string name="enter_old_password">Please enter the old password.</string>
+    <string name="old_pass_not_matched">Old password does not match.</string>
+    <string name="valid_email">Please enter valid email.</string>
+    <string name="enter_email">Please enter email.</string>
+
+    <string name="password_mismatch">Password mismatch.</string>
+    <string name="minimum_length">Minimum password length is 6.</string>
+    <string name="loading">Loading…</string>
+
+</resources>
