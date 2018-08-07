@@ -159,6 +159,15 @@ public class ProfileScreen extends AppCompatActivity {
             }
         }
 
+        ImageView img_back = findViewById(R.id.toolbar_back);
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
 
 
         name_edt.setVisibility(View.GONE);

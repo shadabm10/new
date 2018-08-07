@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +48,14 @@ public  class OtpScreen extends AppCompatActivity {
         pd = new ProgressDialog(OtpScreen.this);
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pd.setMessage("Loading..");
+
+        ImageView img_back = findViewById(R.id.toolbar_back);
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
         order_id = getIntent().getStringExtra("order_id");

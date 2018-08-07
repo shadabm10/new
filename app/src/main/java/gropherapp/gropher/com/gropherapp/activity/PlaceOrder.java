@@ -16,6 +16,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -62,6 +64,7 @@ import cz.msebera.android.httpclient.Header;
 import cz.msebera.android.httpclient.conn.ConnectTimeoutException;
 import es.dmoral.toasty.Toasty;
 import gropherapp.gropher.com.gropherapp.R;
+import gropherapp.gropher.com.gropherapp.fragment.FragmentWallet;
 import gropherapp.gropher.com.gropherapp.utils.AppController;
 import gropherapp.gropher.com.gropherapp.utils.GlobalClass;
 import gropherapp.gropher.com.gropherapp.utils.WebserviceUrl;
@@ -87,6 +90,8 @@ public class PlaceOrder extends AppCompatActivity{
     String add;
     String f_address;
     String lat1,lng1;
+    Fragment fragment = null;
+    RelativeLayout rl_container;
 
 
     @Override
@@ -99,6 +104,10 @@ public class PlaceOrder extends AppCompatActivity{
         pd = new ProgressDialog(PlaceOrder.this);
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pd.setMessage("Loading..");
+
+
+
+
 
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -118,6 +127,15 @@ public class PlaceOrder extends AppCompatActivity{
             }
         }
 
+        ImageView img_back = findViewById(R.id.toolbar_back);
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
 
         spinner_items = new ArrayList<>();
         product_array = new ArrayList<>();
@@ -134,9 +152,11 @@ public class PlaceOrder extends AppCompatActivity{
         tv_img_name = findViewById(R.id.tv_img_name);
         rl_pin_loc = findViewById(R.id.rl_pin_loc);
         tv_location = findViewById(R.id.tv_location);
+        rl_container = findViewById(R.id.rl_container);
 
 
         tv_img_name.setVisibility(View.GONE);
+        rl_container.setVisibility(View.GONE);
 
         product_type_url();
 
@@ -630,11 +650,17 @@ public class PlaceOrder extends AppCompatActivity{
                         } else if(status == 2){
                             Toasty.error(PlaceOrder.this, "Failed To Place Order", Toast.LENGTH_SHORT, true).show();
 
+
+
+
                         } else if(status == 3){
                             Toasty.info(PlaceOrder.this, "Please Add Amount To Your Wallet", Toast.LENGTH_SHORT, true).show();
+                            rl_container.setVisibility(View.VISIBLE);
+                            fragment = new FragmentWallet();
+                            FragmentManager fragmentManager2 = getSupportFragmentManager();
+                            fragmentManager2.beginTransaction().replace(R.id.flContent, fragment).commit();
 
                         } else{
-
 
                             Toasty.warning(PlaceOrder.this, message, Toast.LENGTH_SHORT, true).show();
                         }
@@ -698,4 +724,13 @@ public class PlaceOrder extends AppCompatActivity{
     }
 
 
+    @Override
+    public void onBackPressed() {
+
+        if(rl_container.getVisibility()==View.VISIBLE){
+            rl_container.setVisibility(View.GONE);
+        }else {
+            super.onBackPressed();
+        }
+    }
 }

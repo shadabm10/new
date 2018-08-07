@@ -20,6 +20,8 @@ public class WebserviceUrl {
     public static String resetpass = SiteName +"resetpass";
     public static String get_profile_details = SiteName +"get_profile_details";
     public static String update_profile_details = SiteName +"update_profile_details";
+    public static String add_to_wallet = SiteName +"add_to_wallet";
+    public static String my_wallet = SiteName +"my_wallet";
 
     public static String logout = SiteName +"logout";
 

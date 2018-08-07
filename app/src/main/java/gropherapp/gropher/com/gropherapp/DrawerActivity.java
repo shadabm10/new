@@ -66,7 +66,7 @@ public class DrawerActivity extends AppCompatActivity {
     ImageView toolbar_back,toolbar_profile,toolbar_logo;
 
     Fragment fragment = null;
-    TextView tooltext;
+    TextView tv_wallet_balance;
     String video;
     ImageView toolbar_image;
 
@@ -110,23 +110,6 @@ public class DrawerActivity extends AppCompatActivity {
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pd.setMessage("Loading...");
 
-     /*   defaultOptions = new DisplayImageOptions.Builder()
-                .cacheOnDisk(true).cacheInMemory(true)
-                //  .showImageOnLoading(R.mipmap.loading_black128px)
-                //  .showImageForEmptyUri(R.mipmap.no_image)
-                //  .showImageOnFail(R.mipmap.no_image)
-                //  .showImageOnFail(R.mipmap.img_failed)
-                .imageScaleType(ImageScaleType.EXACTLY)
-                .displayer(new FadeInBitmapDisplayer(300)).build();
-        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(DrawerActivity.this.getApplicationContext())
-                .defaultDisplayImageOptions(defaultOptions)
-                .memoryCache(new WeakMemoryCache())
-                .diskCacheSize(100 * 1024 * 1024).build();
-        ImageLoader.getInstance().init(config);
-        loader = ImageLoader.getInstance();
-
-
-*/
 
         device_id = Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID);
 
@@ -157,18 +140,14 @@ public class DrawerActivity extends AppCompatActivity {
         navigationView =  findViewById(R.id.nvView);
         navigationView.setItemIconTintList(null);
         View head=navigationView.getHeaderView(0);
-     /*   header_text = head.findViewById(R.id.header_text);
-        imageView2 = head.findViewById(R.id.imageView2);*/
-      /*  header_text.setText("Hi, "+globalClass.getFname());
-
-
-        if(globalClass.getProfil_pic().isEmpty()){
-            imageView2.setImageResource(R.mipmap.no_image);
-        }else{
-
-            loader.displayImage(globalClass.getProfil_pic(), imageView2 , defaultOptions);
+        tv_wallet_balance = head.findViewById(R.id.tv_wallet_balance);
+        if(globalClass.getWallet_balance().isEmpty()||globalClass.getWallet_balance().equals("")){
+            tv_wallet_balance.setText("$ 0");
+        }else {
+            tv_wallet_balance.setText("$ "+globalClass.getWallet_balance());
         }
-*/
+
+
 
         Menu m = navigationView.getMenu();
         for (int i = 0; i < m.size(); i++) {
@@ -217,19 +196,16 @@ public class DrawerActivity extends AppCompatActivity {
                 inputMethodManager.hideSoftInputFromWindow(DrawerActivity.this.getCurrentFocus().getWindowToken(), 0);
                 invalidateOptionsMenu();
 
-                 /*   if(globalClass.getProfil_pic().isEmpty()){
-                        imageView2.setImageResource(R.mipmap.no_image);
-                    }else{
-                        loader.displayImage(globalClass.getProfil_pic(), imageView2 , defaultOptions);
-                    }
-                    header_text.setText("Hi, "+globalClass.getFname());*/
+                my_wallet_url();
+
+
 
             }
         };
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-
+        my_wallet_url();
 
 
     }
@@ -545,7 +521,90 @@ public class DrawerActivity extends AppCompatActivity {
 
     }
 
+    private void my_wallet_url() {
+        // Tag used to cancel the request
+        String tag_string_req = "req_login";
 
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                WebserviceUrl.my_wallet, new Response.Listener<String>() {
+
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "url_hit: " + WebserviceUrl.my_wallet);
+                Log.d(TAG, "Response: " + response);
+
+                Gson gson = new Gson();
+
+                try {
+
+
+                    JsonObject jobj = gson.fromJson(response, JsonObject.class);
+                    //JSONObject jObject = new JSONObject(String.valueOf(content));
+                    String status = jobj.get("status").toString().replaceAll("\"", "");
+                    String message = jobj.get("message").toString().replaceAll("\"", "");
+
+
+                    Log.d("TAG", "status :\t" + status);
+                    Log.d("TAG", "message :\t" + message);
+
+                    if(status.equals("1")) {
+
+                        JsonObject jsonObject = jobj.getAsJsonObject("info");
+
+                        String id = jsonObject.get("id").toString().replaceAll("\"", "");
+                        String wallet_amount = jsonObject.get("wallet_amount").toString().replaceAll("\"", "");
+
+                        if(wallet_amount.isEmpty()||wallet_amount.equals("")){
+                            tv_wallet_balance.setText("$ 0");
+                        }else {
+                            tv_wallet_balance.setText("$ "+wallet_amount);
+                        }
+                        globalClass.setWallet_balance(wallet_amount);
+
+                        prefrence.savePrefrence();
+
+
+                     //   Toasty.success(DrawerActivity.this, message, Toast.LENGTH_LONG).show();
+                    }else{
+                        Toasty.error(DrawerActivity.this, message, Toast.LENGTH_LONG).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "add_to_wallet Error: " + error.getMessage());
+                //  Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_LONG).show();
+
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+
+
+                params.put("id",globalClass.getId());
+
+                Log.d(TAG, "getParams: " + params);
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+        strReq.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 10, 1.0f));
+
+
+    }
 
 
 

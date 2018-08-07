@@ -31,6 +31,7 @@ public class GlobalClass extends AppController {
     public RequestQueue mRequestQueue;
     String currency_symbol;
     String grand_total;
+
     String taxPer;
     String taxAmount;
     String sub_total;
@@ -40,6 +41,7 @@ public class GlobalClass extends AppController {
     String discount_id = "";
     String discount_amount = "";
     String slot_to_deliver = "";
+    String wallet_balance;
 
     String shipping_id, shipping_fname, shipping_lname, shipping_address, shipping_city, shipping_state,
             shipping_country, shipping_zip, shipping_mobile,shipping_full_address ;
@@ -162,6 +164,15 @@ public class GlobalClass extends AppController {
     public void setLogin_from(String login_from) {
         this.login_from = login_from;
     }
+
+    public String getWallet_balance() {
+        return wallet_balance;
+    }
+
+    public void setWallet_balance(String wallet_balance) {
+        this.wallet_balance = wallet_balance;
+    }
+
 
     ///////////////////////////////////////////////////////////
     //cart section

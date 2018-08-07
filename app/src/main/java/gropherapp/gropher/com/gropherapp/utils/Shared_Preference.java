@@ -32,6 +32,7 @@ public class Shared_Preference {
 
     private String fcm;
     private String login_from;
+    private String wallet;
 
 
     private static final String PREFS_NAME = "preferences";
@@ -50,6 +51,7 @@ public class Shared_Preference {
     private static final String PREF_ship_address_id = "ship_address_id";
     private static final String PREF_ship_full_address = "ship_full_address";
     private static final String PREF_login_from = "login_from";
+    private static final String PREF_wallet = "wallet_bal";
 
 
 
@@ -110,6 +112,9 @@ public class Shared_Preference {
             pref_ship_full_address = globalclass.getShipping_full_address();
             editor.putString(PREF_ship_full_address, pref_ship_full_address);
 
+            wallet = globalclass.getWallet_balance();
+            editor.putString(PREF_wallet, wallet);
+
 
             editor.commit();
 
@@ -159,6 +164,9 @@ public class Shared_Preference {
 
             pref_profile_img=sharedPreferences.getString(PREF_profile_img,"");
             globalclass.setProfil_pic(pref_profile_img);
+
+            wallet=sharedPreferences.getString(PREF_wallet,"");
+            globalclass.setWallet_balance(wallet);
 
 
             login_from=sharedPreferences.getString(PREF_login_from,"");
