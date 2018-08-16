@@ -30,4 +30,5 @@
     <color name="grey_border">#D6D6D6</color>
     <color name="track_blue">#1081e0</color>
     <color name="track_orange">#f7914d</color>
+    <color name="d_red">#AA1313</color>
 </resources>

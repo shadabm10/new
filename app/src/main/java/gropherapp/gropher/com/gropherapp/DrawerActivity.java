@@ -82,7 +82,7 @@ public class DrawerActivity extends AppCompatActivity {
     ArrayList<String> participants = new ArrayList<>();
     String VIDEO_ID;
     int frag ;
-    //TextView header_text;
+    TextView tv_update_bal;
     String k_stat;
     String fcm_reg_token="not found";
     String fcm_reg_token_temp;
@@ -141,12 +141,23 @@ public class DrawerActivity extends AppCompatActivity {
         navigationView.setItemIconTintList(null);
         View head=navigationView.getHeaderView(0);
         tv_wallet_balance = head.findViewById(R.id.tv_wallet_balance);
+        tv_update_bal = head.findViewById(R.id.tv_update_bal);
+
+
         if(globalClass.getWallet_balance().isEmpty()||globalClass.getWallet_balance().equals("")){
             tv_wallet_balance.setText("$ 0");
         }else {
             tv_wallet_balance.setText("$ "+globalClass.getWallet_balance());
         }
 
+        tv_update_bal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragment = new FragmentWallet();
+                FragmentManager fragmentManager2 = getSupportFragmentManager();
+                fragmentManager2.beginTransaction().replace(R.id.flContent, fragment).commit();
+            }
+        });
 
 
         Menu m = navigationView.getMenu();

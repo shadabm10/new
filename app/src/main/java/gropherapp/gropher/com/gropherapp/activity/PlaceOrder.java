@@ -596,12 +596,9 @@ public class PlaceOrder extends AppCompatActivity{
         params.put("shop_name",edt_shop_name.getText().toString());
         params.put("instruction",edt_instruction.getText().toString());
         params.put("product_price",edt_price.getText().toString());
-      /*  params.put("latitute",lat1);
+        params.put("latitute",lat1);
         params.put("longitude",lng1);
-        params.put("address", f_address); */
-        params.put("latitute","34.000");
-        params.put("longitude","39.0065");
-        params.put("address", "minverva garden");
+        params.put("address", f_address);
         params.put("shop_latitute",s_lat);
         params.put("shop_longitude",s_lng);
         params.put("shop_address",edt_shop_add.getText().toString());

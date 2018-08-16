@@ -46,6 +46,7 @@ public class Signup extends AppCompatActivity {
     ImageView img_proceed, img_eye_2;
     String device_id;
     String fcm_token;
+    TextView tv_termsncondition;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,7 @@ public class Signup extends AppCompatActivity {
         edt_password = findViewById(R.id.edt_password);
 
         img_proceed = findViewById(R.id.img_proceed);
+        tv_termsncondition = findViewById(R.id.tv_termsncondition);
 
 
 
@@ -118,6 +120,14 @@ public class Signup extends AppCompatActivity {
         }
         });
 
+        tv_termsncondition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Signup.this,TermsNCondition.class);
+                startActivity(intent);
+            }
+        });
+
 
 
     }
@@ -133,7 +143,7 @@ public class Signup extends AppCompatActivity {
                                   final String fcm_token , final String device_type) {
         // Tag used to cancel the request
         String tag_string_req = "req_signup";
-
+        pd.show();
 
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
@@ -158,29 +168,33 @@ public class Signup extends AppCompatActivity {
 
                     Log.d("TAG", "status :\t" + status);
                     Log.d("TAG", "message :\t" + message);
+                    if(status.equals("1")) {
 
-                    JsonObject jsonObject = jobj.getAsJsonObject("info");
+                        JsonObject jsonObject = jobj.getAsJsonObject("info");
 
-                    String uid = jsonObject.get("uid").toString().replaceAll("\"", "");
-                    String name = jsonObject.get("name").toString().replaceAll("\"", "");
-                    String mobile = jsonObject.get("mobile").toString().replaceAll("\"", "");
-                    String email = jsonObject.get("email").toString().replaceAll("\"", "");
-                    //String name = jsonObject.get("name").toString().replaceAll("\"", "");
-
-
-                    globalClass.setId(uid);
-                    globalClass.setName(name);
-                    globalClass.setPhone_number(mobile);
-                    globalClass.setEmail(email);
-                    globalClass.setLogin_status(true);
-
-                    prefrence.savePrefrence();
-
-                    Intent intent = new Intent(Signup.this, DrawerActivity.class);
-                    startActivity(intent);
-                    finish();
+                        String uid = jsonObject.get("uid").toString().replaceAll("\"", "");
+                        String name = jsonObject.get("name").toString().replaceAll("\"", "");
+                        String mobile = jsonObject.get("mobile").toString().replaceAll("\"", "");
+                        String email = jsonObject.get("email").toString().replaceAll("\"", "");
+                        //String name = jsonObject.get("name").toString().replaceAll("\"", "");
 
 
+                        globalClass.setId(uid);
+                        globalClass.setName(name);
+                        globalClass.setPhone_number(mobile);
+                        globalClass.setEmail(email);
+                        globalClass.setLogin_status(true);
+
+                        prefrence.savePrefrence();
+
+                        Intent intent = new Intent(Signup.this, DrawerActivity.class);
+                        startActivity(intent);
+                        finish();
+
+                        pd.dismiss();
+                    }else{
+                        Toasty.error(Signup.this, message, Toast.LENGTH_LONG, true).show();
+                    }
 
 
                 } catch (Exception e) {

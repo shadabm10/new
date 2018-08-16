@@ -67,6 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+
             >
 
             <LinearLayout
@@ -82,6 +83,7 @@
                     android:layout_height="wrap_content"
                     >
                     <TextView
+                        android:id="@+id/tv_order_id"
                         android:layout_toLeftOf="@+id/price_tv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -108,7 +110,7 @@
 
 
                 <TextView
-
+                    android:id="@+id/tv_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=" 20 - 06 - 2018, 10:00 AM"
@@ -119,7 +121,7 @@
                     />
 
                 <TextView
-
+                    android:id="@+id/tv_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed. "
@@ -140,69 +142,113 @@
                     android:layout_marginTop="10dp"
                     />
 
-                <TextView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Job Status"
-                    android:gravity="center_horizontal"
-                    android:textSize="14sp"
-                    android:layout_marginTop="10dp"
-                    />
-
-
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="#ffffff"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center_horizontal"
-                    android:padding="10dp">
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:gravity="left"
-                        android:background="@drawable/customround"
-                        android:layout_marginTop="4dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                        />
-                    <View android:id="@+id/pin_code"
-                        android:background="@color/track_blue"
-                        android:layout_width = "100dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_height="1dip"
-                        />
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        android:gravity="left"
-                        android:background="@drawable/customround"
-                        android:layout_marginTop="4dp"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="Job Status"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <ImageView
+                            android:id="@+id/img_accepted"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginTop="4dp"
+                            android:src="@mipmap/status_empty"
+                            android:gravity="start"
 
 
-                        />
-                    <View android:id="@+id/code1"
-                        android:background="@color/track_blue"
-                        android:layout_width = "100dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_height="1dip"
-                        />
+                            />
 
-                    <ImageView
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:gravity="left"
-                        android:layout_marginLeft="-3dp"
-                        android:layout_marginTop="2dp"
-                        android:tint="@color/track_blue"
-                        android:src="@mipmap/pickuplocation"
-                        />
+                        <View
+                            android:id="@+id/pin_code"
+                            android:layout_width="100dp"
+                            android:layout_height="1dip"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/track_blue" />
 
+                        <ImageView
+                            android:id="@+id/img_picked_up"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginTop="4dp"
+                            android:src="@mipmap/status_empty"
+                            android:gravity="left"
+                            android:contentDescription="@string/app_name" />
+
+                        <View
+                            android:id="@+id/code1"
+                            android:layout_width="100dp"
+                            android:layout_height="1dip"
+                            android:layout_marginTop="10dp"
+                            android:background="@color/track_blue" />
+
+                        <ImageView
+                            android:id="@+id/img_out_for_delivery"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginLeft="-3dp"
+                            android:layout_marginTop="4dp"
+                            android:gravity="start"
+                            android:src="@mipmap/status_empty"
+                            android:contentDescription="@string/app_name" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="horizontal"
+                        >
+                        <TextView
+                            android:id="@+id/tv_status_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Accepted"
+                            android:gravity="left"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:id="@+id/tv_status_2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Picked Up"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:textSize="16sp"/>
+                        <TextView
+                            android:id="@+id/tv_status_3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Out for Delivery"
+                            android:gravity="right"
+                            android:textSize="16sp"/>
+
+
+                    </LinearLayout>
 
 
                 </LinearLayout>
-
 
 
                 <LinearLayout
@@ -223,6 +269,7 @@
 
                         <TextView
 
+                            android:id="@+id/tv_pickup"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Pickup Location"
@@ -256,7 +303,7 @@
                             android:src="@mipmap/delivery_location"/>
 
                         <TextView
-
+                            android:id="@+id/tv_delivery_location"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Pickup Location"
@@ -283,6 +330,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_rate_delivery_boy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -327,6 +375,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_rate_app"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
@@ -341,7 +390,7 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Rate Delivery Boy"
+                    android:text="Rate Our App"
 
                     android:textStyle="bold"
                     android:gravity="center"
@@ -369,6 +418,21 @@
 
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_track"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/orange_bg"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:layout_marginBottom="20dp"
+                android:text="TRACK"/>
 
         </LinearLayout>
     </ScrollView>

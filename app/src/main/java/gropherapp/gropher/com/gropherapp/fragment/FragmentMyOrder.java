@@ -34,6 +34,7 @@ import java.util.Map;
 import gropherapp.gropher.com.gropherapp.DrawerActivity;
 import gropherapp.gropher.com.gropherapp.R;
 import gropherapp.gropher.com.gropherapp.activity.LoginScreen;
+import gropherapp.gropher.com.gropherapp.activity.Signup;
 import gropherapp.gropher.com.gropherapp.adapter.AdapterRecentOrder;
 import gropherapp.gropher.com.gropherapp.utils.AppController;
 import gropherapp.gropher.com.gropherapp.utils.GlobalClass;
@@ -59,6 +60,11 @@ public class FragmentMyOrder extends Fragment {
         prefrence = new Shared_Preference(getActivity());
         prefrence.loadPrefrence();
 
+        pd=new ProgressDialog(getActivity());
+        pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        pd.setMessage("Loading..");
+
+
 
         arr_recent_order = new ArrayList<>();
         lv_recent_order = view.findViewById(R.id.lv_recent_order);
@@ -70,6 +76,7 @@ public class FragmentMyOrder extends Fragment {
     }
 
     private void recent_order_url() {
+        pd.show();
         // Tag used to cancel the request
         String tag_string_req = "req_login";
 
@@ -91,6 +98,7 @@ public class FragmentMyOrder extends Fragment {
                     //JSONObject jObject = new JSONObject(String.valueOf(content));
                     String status = jobj.get("status").toString().replaceAll("\"", "");
                     String message = jobj.get("message").toString().replaceAll("\"", "");
+                    String cancellation_policy = jobj.get("cancellation_policy").toString().replaceAll("\"", "");
 
 
                     Log.d("TAG", "status :\t" + status);
@@ -109,7 +117,19 @@ public class FragmentMyOrder extends Fragment {
                         String shop_name = jObject.get("shop_name").toString().replaceAll("\"", "");
                         String instruction = jObject.get("instruction").toString().replaceAll("\"", "");
                         String address = jObject.get("address").toString().replaceAll("\"", "");
+                        String customer_id = jObject.get("customer_id").toString().replaceAll("\"", "");
+                        String deliveryboy_id = jObject.get("deliveryboy_id").toString().replaceAll("\"", "");
+                        String product_type = jObject.get("product_type").toString().replaceAll("\"", "");
+                        String product_quantity = jObject.get("product_quantity").toString().replaceAll("\"", "");
+                        String product_price = jObject.get("product_price").toString().replaceAll("\"", "");
                         String order_placed_on = jObject.get("order_placed_on").toString().replaceAll("\"", "");
+                        String latitute = jObject.get("latitute").toString().replaceAll("\"", "");
+                        String longitude = jObject.get("longitude").toString().replaceAll("\"", "");
+                        String shop_address = jObject.get("shop_address").toString().replaceAll("\"", "");
+                        String shop_latitude = jObject.get("shop_latitude").toString().replaceAll("\"", "");
+                        String shop_longitude = jObject.get("shop_longitude").toString().replaceAll("\"", "");
+                        String status1 = jObject.get("status").toString().replaceAll("\"", "");
+                        String job_status = jObject.get("job_status").toString().replaceAll("\"", "");
 
 
                         HashMap<String, String> map = new HashMap<>();
@@ -119,15 +139,29 @@ public class FragmentMyOrder extends Fragment {
                         map.put("shop_name", shop_name);
                         map.put("instruction", instruction);
                         map.put("address", address);
+                        map.put("customer_id", customer_id);
                         map.put("order_placed_on", order_placed_on);
+                        map.put("deliveryboy_id", deliveryboy_id);
+                        map.put("product_type", product_type);
+                        map.put("product_quantity", product_quantity);
+                        map.put("product_price", product_price);
+                        map.put("latitute", latitute);
+                        map.put("longitude", longitude);
+                        map.put("shop_address", shop_address);
+                        map.put("shop_latitude", shop_latitude);
+                        map.put("shop_longitude", shop_longitude);
+                        map.put("status1", status1);
+                        map.put("job_status", job_status);
 
                         arr_recent_order.add(map);
 
                     }
 
-                    AdapterRecentOrder adapterRecentOrder = new AdapterRecentOrder(getActivity(),arr_recent_order,pd);
+                    AdapterRecentOrder adapterRecentOrder = new AdapterRecentOrder(getActivity(),arr_recent_order,pd,
+                            lv_recent_order,cancellation_policy);
                     lv_recent_order.setAdapter(adapterRecentOrder);
                     adapterRecentOrder.notifyDataSetChanged();
+                    pd.dismiss();
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -139,8 +173,8 @@ public class FragmentMyOrder extends Fragment {
 
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "login Error: " + error.getMessage());
-                Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_LONG).show();
-
+                //Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_LONG).show();
+                pd.dismiss();
             }
         }) {
 

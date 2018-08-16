@@ -22,6 +22,9 @@ public class WebserviceUrl {
     public static String update_profile_details = SiteName +"update_profile_details";
     public static String add_to_wallet = SiteName +"add_to_wallet";
     public static String my_wallet = SiteName +"my_wallet";
+    public static String history_orders = SiteName +"history_orders";
+    public static String job_cancel = SiteName +"job_cancel";
+    public static String cms_details = SiteName +"cms_details";
 
     public static String logout = SiteName +"logout";
 

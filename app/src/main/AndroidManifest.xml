@@ -69,6 +69,10 @@
             android:name=".activity.ProfileScreen"
             android:windowSoftInputMode="stateHidden" />
 
+        <activity
+            android:name=".activity.TermsNCondition"
+            android:windowSoftInputMode="stateHidden" />
+
 
 
 

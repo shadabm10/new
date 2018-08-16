@@ -47,5 +47,6 @@
     <string name="password_mismatch">Password mismatch.</string>
     <string name="minimum_length">Minimum password length is 6.</string>
     <string name="loading">Loading…</string>
+    <string name="proceed">Proceed</string>
 
 </resources>
