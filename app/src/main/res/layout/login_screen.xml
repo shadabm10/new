@@ -35,7 +35,7 @@
 
         <FrameLayout
             android:id="@+id/appbar"
-            android:layout_height="@dimen/_230sdp"
+            android:layout_height="280dp"
             android:layout_margin="20dp"
             android:layout_gravity="center"
             android:layout_width="match_parent"
@@ -183,6 +183,7 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/button"
             app:fabSize="normal"
+
             app:layout_anchor="@+id/appbar"
             app:layout_anchorGravity="bottom|center"
             android:contentDescription="TODO" />

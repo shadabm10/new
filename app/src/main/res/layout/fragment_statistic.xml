@@ -64,10 +64,9 @@
 
 
         <TextView
-
+            android:id="@+id/tv_total_order_placed"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="00.00"
             android:textSize="20sp"
             android:padding="20dp"
             android:layout_weight="1"
@@ -87,10 +86,10 @@
 
         android:orientation="horizontal">
         <TextView
-
+            android:id="@+id/tv_order_delivered"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="00.00"
+
             android:textSize="20sp"
             android:padding="20dp"
             android:layout_weight="1"
@@ -166,10 +165,10 @@
         </RelativeLayout>
 
         <TextView
-
+            android:id="@+id/tv_rating_given"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="00.00"
+
             android:textSize="20sp"
             android:padding="20dp"
             android:layout_weight="1"

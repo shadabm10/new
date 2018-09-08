@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,6 +39,7 @@ import java.util.Map;
 import es.dmoral.toasty.Toasty;
 import gropherapp.gropher.com.gropherapp.R;
 import gropherapp.gropher.com.gropherapp.activity.OtpScreen;
+import gropherapp.gropher.com.gropherapp.activity.PayMoreMoney;
 import gropherapp.gropher.com.gropherapp.activity.RecentOrderDetailScreen;
 import gropherapp.gropher.com.gropherapp.activity.TrackOrderScreen;
 import gropherapp.gropher.com.gropherapp.utils.AppController;
@@ -55,11 +57,12 @@ public class AdapterRecentOrder extends BaseAdapter {
 
 
     ImageView img_product;
-    TextView tv_name, tv_description, tv_location, tv_date,tv_cancel;
+    TextView tv_name, tv_description, tv_location, tv_date,tv_cancel,tv_order_status_val,tv_pay_more;
     ProgressDialog pd;
     ListView lv_recent_order;
     String TAG = "a_received";
     String cancellation_policy;
+    String is_request_for_money,status;
 
     public AdapterRecentOrder(Context c, ArrayList<HashMap<String, String>> arr_recent_order,
                             ProgressDialog pd, ListView lv_recent_order,String cancellation_policy) {
@@ -110,6 +113,8 @@ public class AdapterRecentOrder extends BaseAdapter {
         tv_location = view1.findViewById(R.id.tv_location);
         tv_date = view1.findViewById(R.id.tv_date);
         tv_cancel = view1.findViewById(R.id.tv_cancel);
+        tv_order_status_val = view1.findViewById(R.id.tv_order_status_val);
+        tv_pay_more = view1.findViewById(R.id.tv_pay_more);
 
       
 
@@ -117,6 +122,61 @@ public class AdapterRecentOrder extends BaseAdapter {
         tv_description.setText(arr_recent_order.get(position).get("instruction"));
         tv_location.setText(arr_recent_order.get(position).get("address"));
         tv_date.setText(arr_recent_order.get(position).get("order_placed_on"));
+
+        is_request_for_money = arr_recent_order.get(position).get("is_request_for_money");
+
+        switch (is_request_for_money) {
+            case "1":
+
+                tv_order_status_val.setText("Money Requested");
+
+                tv_order_status_val.setTextColor(mContext.getResources().getColor(R.color.green));
+                tv_pay_more.setVisibility(View.VISIBLE);
+                tv_cancel.setVisibility(View.GONE);
+                break;
+
+
+
+            default:
+
+                status = arr_recent_order.get(position).get("status1");
+                tv_pay_more.setVisibility(View.GONE);
+                tv_cancel.setVisibility(View.VISIBLE);
+
+                switch (status) {
+                    case "order_placed":
+                        tv_order_status_val.setText("Placed");
+                        tv_order_status_val.setTextColor(mContext.getResources().getColor(R.color.orange));
+
+                        break;
+                    case "order_accepted":
+                        tv_order_status_val.setText("Accepted");
+                        tv_order_status_val.setTextColor(mContext.getResources().getColor(R.color.purple));
+
+                        break;
+                    case "order_out_for_delivery":
+                        tv_order_status_val.setText("Out For Delivery");
+                        tv_order_status_val.setTextColor(mContext.getResources().getColor(R.color.track_blue));
+
+                        break;
+                    case "order_completed":
+                        tv_order_status_val.setText("Completed");
+                        tv_order_status_val.setTextColor(mContext.getResources().getColor(R.color.green));
+
+                        break;
+                    case "order_cancelled":
+                        tv_order_status_val.setText("Cancelled");
+                        tv_order_status_val.setTextColor(mContext.getResources().getColor(R.color.red));
+
+                        break;
+                    default:
+                        tv_order_status_val.setText("");
+                        break;
+                }
+                break;
+        }
+
+
 /*
 
         if (position % 2 == 0) {
@@ -127,6 +187,17 @@ public class AdapterRecentOrder extends BaseAdapter {
             view1.setBackgroundColor(mContext.getResources().getColor(R.color.lightblue));
         }
 */
+
+
+        tv_pay_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext,PayMoreMoney.class);
+                intent.putExtra("id",arr_recent_order.get(position).get("id"));
+                intent.putExtra("p_name",arr_recent_order.get(position).get("name"));
+                mContext.startActivity(intent);
+            }
+        });
 
         view1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,6 +211,10 @@ public class AdapterRecentOrder extends BaseAdapter {
                 intent.putExtra("address",arr_recent_order.get(position).get("address"));
                 intent.putExtra("instruction",arr_recent_order.get(position).get("instruction"));
                 intent.putExtra("job_status",arr_recent_order.get(position).get("job_status"));
+                intent.putExtra("latitute",arr_recent_order.get(position).get("latitute"));
+                intent.putExtra("longitude",arr_recent_order.get(position).get("longitude"));
+                intent.putExtra("shop_latitude",arr_recent_order.get(position).get("shop_latitude"));
+                intent.putExtra("shop_longitude",arr_recent_order.get(position).get("shop_longitude"));
                 mContext.startActivity(intent);
 
             }

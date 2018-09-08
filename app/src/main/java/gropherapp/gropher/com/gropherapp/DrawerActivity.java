@@ -43,6 +43,7 @@ import es.dmoral.toasty.Toasty;
 import gropherapp.gropher.com.gropherapp.activity.LoginScreen;
 
 import gropherapp.gropher.com.gropherapp.activity.ProfileScreen;
+import gropherapp.gropher.com.gropherapp.fragment.FragmentCancelOrder;
 import gropherapp.gropher.com.gropherapp.fragment.FragmentHistory;
 import gropherapp.gropher.com.gropherapp.fragment.FragmentMyOrder;
 import gropherapp.gropher.com.gropherapp.fragment.FragmentReview;
@@ -321,6 +322,13 @@ public class DrawerActivity extends AppCompatActivity {
                 fragment = new FragmentHistory();
                 FragmentManager fragmentManager3 = getSupportFragmentManager();
                 fragmentManager3.beginTransaction().replace(R.id.flContent, fragment).commit();
+                break;
+
+            case R.id.nav_cancel_order:
+
+                fragment = new FragmentCancelOrder();
+                FragmentManager fragmentManager6 = getSupportFragmentManager();
+                fragmentManager6.beginTransaction().replace(R.id.flContent, fragment).commit();
                 break;
 
             case R.id.nav_reviews:

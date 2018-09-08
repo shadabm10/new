@@ -25,6 +25,12 @@ public class WebserviceUrl {
     public static String history_orders = SiteName +"history_orders";
     public static String job_cancel = SiteName +"job_cancel";
     public static String cms_details = SiteName +"cms_details";
+    public static String accept_more_money_request = SiteName +"accept_more_money_request";
+    public static String view_requested_money = SiteName +"view_requested_money";
+    public static String review_list = SiteName +"review_list";
+    public static String review = SiteName +"review";
+    public static String get_statistics = SiteName +"get_statistics";
+    public static String cancel_order_list = SiteName +"cancel_order_list";
 
     public static String logout = SiteName +"logout";
 

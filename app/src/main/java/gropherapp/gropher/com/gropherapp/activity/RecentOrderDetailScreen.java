@@ -15,12 +15,12 @@ import gropherapp.gropher.com.gropherapp.R;
 
 public class RecentOrderDetailScreen extends AppCompatActivity{
 
-    RatingBar rating1,rating;
+
     TextView tv_order_id,price_tv,tv_date,tv_description,tv_pickup,tv_delivery_location,tv_track;
     String status;
     ImageView img_back,img_accepted,img_picked_up,img_out_for_delivery;
     TextView tv_status_1,tv_status_2,tv_status_3;
-    LinearLayout ll_rate_delivery_boy,ll_rate_app;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +35,7 @@ public class RecentOrderDetailScreen extends AppCompatActivity{
         });
 
 
-        rating1 = findViewById(R.id.rating1);
-        rating = findViewById(R.id.rating);
+
         tv_order_id = findViewById(R.id.tv_order_id);
         price_tv = findViewById(R.id.price_tv);
         tv_date = findViewById(R.id.tv_date);
@@ -44,8 +43,7 @@ public class RecentOrderDetailScreen extends AppCompatActivity{
         tv_pickup = findViewById(R.id.tv_pickup);
         tv_delivery_location = findViewById(R.id.tv_delivery_location);
         tv_track = findViewById(R.id.tv_track);
-        ll_rate_delivery_boy = findViewById(R.id.ll_rate_delivery_boy);
-        ll_rate_app = findViewById(R.id.ll_rate_app);
+
 
         tv_status_1=findViewById(R.id.tv_status_1);
         tv_status_2=findViewById(R.id.tv_status_2);
@@ -55,8 +53,7 @@ public class RecentOrderDetailScreen extends AppCompatActivity{
         img_picked_up=findViewById(R.id.img_picked_up);
         img_out_for_delivery=findViewById(R.id.img_out_for_delivery);
 
-        rating.setNumStars(5);
-        rating1.setNumStars(5);
+
         status =  getIntent().getStringExtra("job_status");
 
         tv_order_id.setText("Order Id : "+getIntent().getStringExtra("id"));
@@ -66,13 +63,17 @@ public class RecentOrderDetailScreen extends AppCompatActivity{
         tv_description.setText(getIntent().getStringExtra("instruction"));
         tv_delivery_location.setText(getIntent().getStringExtra("address"));
 
-        ll_rate_delivery_boy.setVisibility(View.GONE);
-        ll_rate_app.setVisibility(View.GONE);
-
         tv_track.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(RecentOrderDetailScreen.this, TrackOrderScreen.class);
+                intent.putExtra("latitute",getIntent().getStringExtra("latitute"));
+                intent.putExtra("longitude",getIntent().getStringExtra("longitude"));
+                intent.putExtra("shop_latitude",getIntent().getStringExtra("shop_latitude"));
+                intent.putExtra("shop_longitude",getIntent().getStringExtra("shop_longitude"));
+                intent.putExtra("shop_address",getIntent().getStringExtra("shop_address"));
+                intent.putExtra("address",getIntent().getStringExtra("address"));
+
                 startActivity(intent);
             }
         });
@@ -134,8 +135,6 @@ public class RecentOrderDetailScreen extends AppCompatActivity{
                 break;
 
             case "delivered":
-                ll_rate_delivery_boy.setVisibility(View.VISIBLE);
-                ll_rate_app.setVisibility(View.VISIBLE);
 
 
                 break;

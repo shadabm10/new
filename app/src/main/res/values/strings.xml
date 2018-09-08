@@ -2,7 +2,7 @@
     <string name="app_name">Gopher App</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
-    <string name="GOOGLE_MAPS_API_KEY">AIzaSyD4FS-ZAKH9m4sIok9G_RbP_WOtZoPIRe0</string>
+    <string name="GOOGLE_MAPS_API_KEY">AIzaSyBqBjfYyRQjj7AVnhW4jRoKRZ6fft-lk60</string>
     <string name="GEO_CODE_API_KEY">AIzaSyD6sz1rz21RLdiYM6cuvzqVVXwcZtPeItE</string>
 
     <string name="select_option">Select Option</string>

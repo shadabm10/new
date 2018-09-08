@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -28,8 +27,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import gropherapp.gropher.com.gropherapp.R;
+import gropherapp.gropher.com.gropherapp.adapter.AdapterCancel;
 import gropherapp.gropher.com.gropherapp.adapter.AdapterHistory;
-import gropherapp.gropher.com.gropherapp.adapter.AdapterRecentOrder;
 import gropherapp.gropher.com.gropherapp.adapter.AdapterReview;
 import gropherapp.gropher.com.gropherapp.utils.AppController;
 import gropherapp.gropher.com.gropherapp.utils.GlobalClass;
@@ -37,8 +36,8 @@ import gropherapp.gropher.com.gropherapp.utils.Shared_Preference;
 import gropherapp.gropher.com.gropherapp.utils.WebserviceUrl;
 
 
-public class FragmentReview extends Fragment {
 
+public class FragmentCancelOrder extends Fragment {
     String TAG = "review";
     GlobalClass globalClass;
     ProgressDialog pd;
@@ -46,11 +45,11 @@ public class FragmentReview extends Fragment {
 
     ArrayList<HashMap<String,String>> arr_recent_order;
 
-    RecyclerView rv_review;
+    RecyclerView rv_cancel;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frag_review, container, false);
+        View view = inflater.inflate(R.layout.frag_cancel_order, container, false);
 
         globalClass = (GlobalClass) getActivity().getApplicationContext();
 
@@ -61,10 +60,10 @@ public class FragmentReview extends Fragment {
         arr_recent_order = new ArrayList<>();
 
 
-        rv_review = view.findViewById(R.id.rv_review);
+        rv_cancel = view.findViewById(R.id.rv_cancel);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-        rv_review.setLayoutManager(mLayoutManager);
+        rv_cancel.setLayoutManager(mLayoutManager);
 
         order_history_url();
 
@@ -79,7 +78,7 @@ public class FragmentReview extends Fragment {
         pd.show();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                WebserviceUrl.review_list, new Response.Listener<String>() {
+                WebserviceUrl.cancel_order_list, new Response.Listener<String>() {
 
 
             @Override
@@ -105,7 +104,7 @@ public class FragmentReview extends Fragment {
 
                         arr_recent_order.clear();
 
-                        JsonArray jsonArray =jobj.getAsJsonArray("order_list");
+                        JsonArray jsonArray =jobj.getAsJsonArray("cancel_order_list");
                         for(int i=0; i<jsonArray.size();i++) {
 
                             JsonObject jObject = (JsonObject) jsonArray.get(i);
@@ -113,26 +112,47 @@ public class FragmentReview extends Fragment {
                             String id = jObject.get("id").toString().replaceAll("\"", "");
                             String customer_id = jObject.get("customer_id").toString().replaceAll("\"", "");
                             String deliveryboy_id = jObject.get("deliveryboy_id").toString().replaceAll("\"", "");
-                            String product_name = jObject.get("product_name").toString().replaceAll("\"", "");
+                            String name = jObject.get("name").toString().replaceAll("\"", "");
+                            String otp = jObject.get("name").toString().replaceAll("\"", "");
+                            String product_type = jObject.get("product_type").toString().replaceAll("\"", "");
+                            String product_quantity = jObject.get("product_quantity").toString().replaceAll("\"", "");
+                            String image = jObject.get("image").toString().replaceAll("\"", "");
+                            String shop_name = jObject.get("shop_name").toString().replaceAll("\"", "");
+                            String instruction = jObject.get("instruction").toString().replaceAll("\"", "");
+                            String product_price = jObject.get("product_price").toString().replaceAll("\"", "");
+                            String latitute = jObject.get("latitute").toString().replaceAll("\"", "");
+                            String longitude = jObject.get("longitude").toString().replaceAll("\"", "");
+                            String address = jObject.get("address").toString().replaceAll("\"", "");
+                            String shop_address = jObject.get("shop_address").toString().replaceAll("\"", "");
+                            String shop_latitude = jObject.get("shop_latitude").toString().replaceAll("\"", "");
+                            String shop_longitude = jObject.get("shop_longitude").toString().replaceAll("\"", "");
+                            String status1 = jObject.get("status").toString().replaceAll("\"", "");
+                            String job_status = jObject.get("job_status").toString().replaceAll("\"", "");
                             String order_placed_on = jObject.get("order_placed_on").toString().replaceAll("\"", "");
-                            String review = jObject.get("review").toString().replaceAll("\"", "");
-                            String rating = jObject.get("rating").toString().replaceAll("\"", "");
-                            String app_rating = jObject.get("app_rating").toString().replaceAll("\"", "");
-                            String fname = jObject.get("fname").toString().replaceAll("\"", "");
-                            String lname = jObject.get("lname").toString().replaceAll("\"", "");
+
 
 
                             HashMap<String, String> map_ser = new HashMap<String, String>();
                             map_ser.put("id", id);
                             map_ser.put("customer_id", customer_id);
                             map_ser.put("deliveryboy_id", deliveryboy_id);
-                            map_ser.put("product_name", product_name);
-                            map_ser.put("review", review);
-                            map_ser.put("rating", rating);
-                            map_ser.put("app_rating", app_rating);
+                            map_ser.put("name", name);
+                            map_ser.put("otp", otp);
+                            map_ser.put("product_type", product_type);
+                            map_ser.put("product_quantity", product_quantity);
+                            map_ser.put("image", image);
+                            map_ser.put("shop_name", shop_name);
+                            map_ser.put("instruction", instruction);
+                            map_ser.put("product_price", product_price);
+                            map_ser.put("latitute", latitute);
+                            map_ser.put("longitude", longitude);
+                            map_ser.put("address", address);
+                            map_ser.put("shop_address", shop_address);
+                            map_ser.put("shop_latitude", shop_latitude);
+                            map_ser.put("shop_longitude", shop_longitude);
+                            map_ser.put("status1", status1);
+                            map_ser.put("job_status", job_status);
                             map_ser.put("order_placed_on", order_placed_on);
-                            map_ser.put("fname", fname);
-                            map_ser.put("lname", lname);
 
                             arr_recent_order.add(map_ser);
 
@@ -140,9 +160,9 @@ public class FragmentReview extends Fragment {
                         }
 
                         Log.d(TAG, "onResponse: p_arr:  "+arr_recent_order);
-                        AdapterReview adapterReview = new AdapterReview(getActivity(), arr_recent_order);
-                        rv_review.setAdapter(adapterReview);
-                        adapterReview.notifyDataSetChanged();
+                        AdapterCancel adapterCancel = new AdapterCancel(getActivity(), arr_recent_order);
+                        rv_cancel.setAdapter(adapterCancel);
+                        adapterCancel.notifyDataSetChanged();
 
                         pd.dismiss();
 
@@ -169,7 +189,7 @@ public class FragmentReview extends Fragment {
                 params.put("id",globalClass.getId());
 
                 Log.d(TAG, "getParams: " + params);
-                Log.d(TAG, "url_hit: " + WebserviceUrl.review_list);
+                Log.d(TAG, "url_hit: " + WebserviceUrl.cancel_order_list);
 
                 return params;
             }

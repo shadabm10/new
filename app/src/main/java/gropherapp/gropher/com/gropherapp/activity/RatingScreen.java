@@ -1,15 +1,15 @@
-package gropherapp.gropher.com.gropherapp.fragment;
+package gropherapp.gropher.com.gropherapp.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,63 +26,87 @@ import java.util.Map;
 
 import es.dmoral.toasty.Toasty;
 import gropherapp.gropher.com.gropherapp.R;
-import gropherapp.gropher.com.gropherapp.activity.PlaceOrder;
-import gropherapp.gropher.com.gropherapp.activity.RatingScreen;
 import gropherapp.gropher.com.gropherapp.utils.AppController;
 import gropherapp.gropher.com.gropherapp.utils.GlobalClass;
 import gropherapp.gropher.com.gropherapp.utils.WebserviceUrl;
 
+/**
+ * Created by Developer on 9/5/18.
+ */
 
-public class FragmentStatistic extends Fragment {
-    TextView tv_place_order;
+public class RatingScreen extends AppCompatActivity {
+    
+    RatingBar rating1,rating;
+    LinearLayout ll_rate_delivery_boy,ll_rate_app;
+    ImageView img_back;
+    TextView tv_submit;
     GlobalClass globalClass;
     ProgressDialog pd;
-    String TAG = "statics";
-    TextView tv_total_order_placed,tv_order_delivered,tv_rating_given;
-    @Nullable
+    String TAG = "rating";
+    
+    
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_statistic, container, false);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.rating_screen);
 
+        globalClass = (GlobalClass)getApplicationContext();
 
-        globalClass = (GlobalClass) getActivity().getApplicationContext();
-
-        pd=new ProgressDialog(getActivity());
+        pd=new ProgressDialog(RatingScreen.this);
         pd.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         pd.setMessage("Loading..");
 
-        tv_place_order = view.findViewById(R.id.tv_place_order);
-        tv_total_order_placed = view.findViewById(R.id.tv_total_order_placed);
-        tv_order_delivered = view.findViewById(R.id.tv_order_delivered);
-        tv_rating_given = view.findViewById(R.id.tv_rating_given);
 
-        tv_place_order.setOnClickListener(new View.OnClickListener() {
+        img_back = findViewById(R.id.toolbar_back);
+        tv_submit = findViewById(R.id.tv_submit);
+        img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),PlaceOrder.class);
-                startActivity(intent);
+                finish();
             }
         });
 
-        if(globalClass.isNetworkAvailable()){
-            get_statistics_url();
-        }
 
-        return view;
+        rating1 = findViewById(R.id.rating1);
+        rating = findViewById(R.id.rating);
+        ll_rate_delivery_boy = findViewById(R.id.ll_rate_delivery_boy);
+        ll_rate_app = findViewById(R.id.ll_rate_app);
+
+
+
+        tv_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               if( globalClass.isNetworkAvailable()){
+
+                   String rate_1 = String.valueOf(rating.getRating());
+                   String rate_2 = String.valueOf(rating1.getRating());
+                   if(rating.getRating()>0){
+                       if(rating1.getRating()>0){
+                           review_url(rate_1,rate_2);
+                       }else{
+                           Toasty.warning(RatingScreen.this,"Please rate our app.", Toast.LENGTH_SHORT, true).show();
+                       }
+                   }else{
+                       Toasty.warning(RatingScreen.this,"Please rate delivery boy.", Toast.LENGTH_SHORT, true).show();
+                   }
+
+                }
+            }
+        });
     }
-
-    private void get_statistics_url() {
+    private void review_url(final String rate_1, final String rate_2) {
         // Tag used to cancel the request
         String tag_string_req = "req_login";
         pd.show();
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
-                WebserviceUrl.get_statistics, new Response.Listener<String>() {
+                WebserviceUrl.review, new Response.Listener<String>() {
 
 
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "url_hit: " + WebserviceUrl.get_statistics);
+                Log.d(TAG, "url_hit: " + WebserviceUrl.review);
                 Log.d(TAG, "Response: " + response);
 
                 Gson gson = new Gson();
@@ -101,21 +125,10 @@ public class FragmentStatistic extends Fragment {
 
                     if(status.equals("1")) {
 
-
-                        JsonObject statistics_list = jobj.getAsJsonObject("statistics_list");
-
-                        String total_orders_placed = statistics_list.get("total_orders_placed").toString().replaceAll("\"", "");
-                        String total_orders_completed = statistics_list.get("total_orders_completed").toString().replaceAll("\"", "");
-                        String total_review_list = statistics_list.get("total_review_list").toString().replaceAll("\"", "");
-
-                        tv_total_order_placed.setText(total_orders_placed);
-                        tv_order_delivered.setText(total_orders_completed);
-                        tv_rating_given.setText(total_review_list);
-
-                        //Toasty.success(getActivity(),message, Toast.LENGTH_SHORT, true).show();
+                        Toasty.success(RatingScreen.this,message, Toast.LENGTH_SHORT, true).show();
 
                     }else{
-                        Toasty.error(getActivity(), message, Toast.LENGTH_SHORT, true).show();
+                        Toasty.error(RatingScreen.this, message, Toast.LENGTH_SHORT, true).show();
 
                     }
                     pd.dismiss();
@@ -143,6 +156,10 @@ public class FragmentStatistic extends Fragment {
 
 
                 params.put("id", globalClass.getId());
+                params.put("deliveryboy_id", getIntent().getStringExtra("deliveryboy_id"));
+                params.put("rating",    rate_1);
+                params.put("app_rating", rate_2);
+                params.put("order_id", getIntent().getStringExtra("order_id"));
 
                 Log.d(TAG, "getParams: " + params);
 

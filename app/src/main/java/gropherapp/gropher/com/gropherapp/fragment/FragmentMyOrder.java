@@ -72,6 +72,7 @@ public class FragmentMyOrder extends Fragment {
         if(globalClass.isNetworkAvailable()){
             recent_order_url();
         }
+
         return view;
     }
 
@@ -130,6 +131,7 @@ public class FragmentMyOrder extends Fragment {
                         String shop_longitude = jObject.get("shop_longitude").toString().replaceAll("\"", "");
                         String status1 = jObject.get("status").toString().replaceAll("\"", "");
                         String job_status = jObject.get("job_status").toString().replaceAll("\"", "");
+                        String is_request_for_money = jObject.get("is_request_for_money").toString().replaceAll("\"", "");
 
 
                         HashMap<String, String> map = new HashMap<>();
@@ -152,6 +154,7 @@ public class FragmentMyOrder extends Fragment {
                         map.put("shop_longitude", shop_longitude);
                         map.put("status1", status1);
                         map.put("job_status", job_status);
+                        map.put("is_request_for_money", is_request_for_money);
 
                         arr_recent_order.add(map);
 

@@ -1,24 +1,27 @@
 package gropherapp.gropher.com.gropherapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import gropherapp.gropher.com.gropherapp.R;
+import gropherapp.gropher.com.gropherapp.activity.RatingScreen;
 import gropherapp.gropher.com.gropherapp.utils.GlobalClass;
 
 
-public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.ViewHolder> {
+public class AdapterReview extends RecyclerView.Adapter<AdapterReview.ViewHolder> {
 
     Context mContext;
     ArrayList<HashMap<String,String>> arr_order_history;
@@ -31,7 +34,7 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.ViewHold
     DisplayImageOptions defaultOptions;
     GlobalClass globalClass;
 
-    public AdapterHistory(Context c, ArrayList<HashMap<String,String>> arr_order_history ) {
+    public AdapterReview(Context c, ArrayList<HashMap<String,String>> arr_order_history ) {
         this.inflater = LayoutInflater.from(c);
         mContext = c;
         this.arr_order_history = arr_order_history;
@@ -44,41 +47,62 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.ViewHold
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.history_single_row, parent, false);
-        return new AdapterHistory.ViewHolder(view);
+        View view = inflater.inflate(R.layout.review_row_view, parent, false);
+        return new AdapterReview.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
         String delivery_boy_name =arr_order_history.get(position).get("fname") +" "+arr_order_history.get(position).get("lname");
-        String status =arr_order_history.get(position).get("status1");
-
+        String rating_val = arr_order_history.get(position).get("rating");
 
         holder.tv_order_id.setText(arr_order_history.get(position).get("id"));
         holder.tv_customer_name.setText(delivery_boy_name);
-        holder.tv_product_name.setText(arr_order_history.get(position).get("name"));
+        holder.tv_product_name.setText(arr_order_history.get(position).get("product_name"));
         holder.tv_order_date.setText(arr_order_history.get(position).get("order_placed_on"));
-        holder.tv_price.setText("$ "+arr_order_history.get(position).get("product_price"));
-        holder.tv_qty.setText(arr_order_history.get(position).get("product_quantity"));
+
+
+
+
+        if(rating_val.equals("0")){
+            holder.tv_review.setVisibility(View.VISIBLE);
+            holder.rl_rating.setVisibility(View.GONE);
+        }else{
+            holder.tv_review.setVisibility(View.GONE);
+            holder.rl_rating.setVisibility(View.VISIBLE);
+            holder.rating.setRating(Float.parseFloat(rating_val));
+
+        }
+
+        holder.tv_review.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, RatingScreen.class);
+                intent.putExtra("order_id",arr_order_history.get(position).get("id"));
+                intent.putExtra("deliveryboy_id",arr_order_history.get(position).get("deliveryboy_id"));
+
+                mContext.startActivity(intent);
+            }
+        });
+
+
+      /*  holder.tv_qty.setText(arr_order_history.get(position).get("product_quantity"));
         holder.tv_address.setText(arr_order_history.get(position).get("address"));
 
 
-        switch (status) {
-            case "order_cancelled":
-                holder.tv_order_status.setText("Cancelled");
-                holder.tv_order_status.setTextColor(mContext.getResources().getColor(R.color.red));
 
-                break;
-            case "order_completed":
-                holder.tv_order_status.setText("Completed");
-                holder.tv_order_status.setTextColor(mContext.getResources().getColor(R.color.green));
-                break;
-            default:
-                holder.tv_order_status.setText("");
-                break;
+        if(status.equals("order_cancelled")){
+            holder.tv_order_status.setText("Cancelled");
+            holder.tv_order_status.setTextColor(mContext.getResources().getColor(R.color.red));
+
+        }else if(status.equals("order_completed")){
+            holder.tv_order_status.setText("Completed");
+            holder.tv_order_status.setTextColor(mContext.getResources().getColor(R.color.green));
+        }else{
+            holder.tv_order_status.setText("");
         }
-
+*/
 
 
 
@@ -108,8 +132,11 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.ViewHold
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_order_date,tv_address,tv_qty,tv_price,tv_product_name,
-                tv_customer_name,tv_order_id,tv_order_status;
+        TextView tv_order_date,tv_product_name,tv_customer_name,
+                tv_review,tv_order_id;
+
+        RatingBar rating;
+        RelativeLayout rl_rating;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -117,13 +144,13 @@ public class AdapterHistory extends RecyclerView.Adapter<AdapterHistory.ViewHold
 
 
             tv_order_id = itemView.findViewById(R.id.tv_order_id);
-            tv_customer_name = itemView.findViewById(R.id.tv_customer_name);
+            tv_review = itemView.findViewById(R.id.tv_review);
             tv_product_name = itemView.findViewById(R.id.tv_product_name);
-            tv_price = itemView.findViewById(R.id.tv_price);
-            tv_qty = itemView.findViewById(R.id.tv_qty);
-            tv_address = itemView.findViewById(R.id.tv_address);
             tv_order_date = itemView.findViewById(R.id.tv_order_date);
-            tv_order_status = itemView.findViewById(R.id.tv_order_status);
+            tv_customer_name = itemView.findViewById(R.id.tv_customer_name);
+            rl_rating = itemView.findViewById(R.id.rl_rating);
+
+            rating = itemView.findViewById(R.id.rating);
 
 
 

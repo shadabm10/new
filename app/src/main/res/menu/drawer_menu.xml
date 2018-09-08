@@ -24,6 +24,11 @@
             android:id="@+id/nav_ord_his"
             android:title="Order History"
             android:icon="@mipmap/myorders"/>
+
+        <item
+            android:id="@+id/nav_cancel_order"
+            android:title="Cancel Orders"
+            android:icon="@mipmap/myorders"/>
         <item
             android:id="@+id/nav_reviews"
             android:title="Reviews"

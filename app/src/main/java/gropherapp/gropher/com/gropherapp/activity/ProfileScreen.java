@@ -80,7 +80,6 @@ public class ProfileScreen extends AppCompatActivity {
     RatingBar ratingBar;
     private final int PICK_IMAGE_CAMERA = 1, PICK_IMAGE_GALLERY = 2;
     File p_image;
-    String str_id;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -90,8 +89,6 @@ public class ProfileScreen extends AppCompatActivity {
         initialisation();
         function();
         get_profile_url();
-
-
 
     }
 
@@ -305,7 +302,6 @@ public class ProfileScreen extends AppCompatActivity {
         }
     }
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -404,7 +400,6 @@ public class ProfileScreen extends AppCompatActivity {
         cursor.moveToFirst();
         return cursor.getString(column_index);
     }
-
 
     private void get_profile_url() {
         // Tag used to cancel the request
@@ -512,7 +507,6 @@ public class ProfileScreen extends AppCompatActivity {
 
 
     }
-
 
     public void update_profile_details_url(){
 

@@ -596,9 +596,13 @@ public class PlaceOrder extends AppCompatActivity{
         params.put("shop_name",edt_shop_name.getText().toString());
         params.put("instruction",edt_instruction.getText().toString());
         params.put("product_price",edt_price.getText().toString());
-        params.put("latitute",lat1);
+      /*  params.put("latitute",lat1);
         params.put("longitude",lng1);
-        params.put("address", f_address);
+        params.put("address", f_address);  */
+        params.put("latitute","22.451170");
+        params.put("longitude","88.301800");
+        params.put("address", "Sketch Web Solutions, Minerva Gardens, Opp. IIM Joka, Diamond Harbour Rd, Joka, Kolkata, West Bengal" );
+
         params.put("shop_latitute",s_lat);
         params.put("shop_longitude",s_lng);
         params.put("shop_address",edt_shop_add.getText().toString());

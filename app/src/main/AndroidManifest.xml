@@ -73,6 +73,14 @@
             android:name=".activity.TermsNCondition"
             android:windowSoftInputMode="stateHidden" />
 
+        <activity
+            android:name=".activity.PayMoreMoney"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity
+            android:name=".activity.RatingScreen"
+            android:windowSoftInputMode="stateHidden" />
+
 
 
 

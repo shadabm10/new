@@ -20,7 +20,6 @@
         android:layout_above="@+id/img_marker"
 
         android:gravity="center"
-        android:background="@android:drawable/sym_action_chat"
         android:textColor="@color/black"
         android:padding="10dp"/>
     <ImageView
