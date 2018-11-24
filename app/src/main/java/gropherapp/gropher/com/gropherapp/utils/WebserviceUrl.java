@@ -5,7 +5,8 @@ package gropherapp.gropher.com.gropherapp.utils;
 public class WebserviceUrl {
 
    // private static String SiteName = "http://apistore.mycartface.com/api/";
-    private static String SiteName = "http://lab-3.sketchdemos.com/P1117_Gropher_App/Api/";
+   // private static String SiteName = "http://lab-3.sketchdemos.com/P1117_Gropher_App/Api/";
+   private static String SiteName = "http://justgopherit.com/Api/";
     public static String fcm_token = "123456789";
 
 

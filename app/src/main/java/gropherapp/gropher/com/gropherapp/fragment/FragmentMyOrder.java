@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import es.dmoral.toasty.Toasty;
 import gropherapp.gropher.com.gropherapp.DrawerActivity;
 import gropherapp.gropher.com.gropherapp.R;
 import gropherapp.gropher.com.gropherapp.activity.LoginScreen;
@@ -89,7 +90,7 @@ public class FragmentMyOrder extends Fragment {
             public void onResponse(String response) {
                 Log.d(TAG, "url_hit: " + WebserviceUrl.recent_orders);
                 Log.d(TAG, "Response: " + response);
-
+                pd.dismiss();
                 Gson gson = new Gson();
 
                 try {
@@ -98,74 +99,79 @@ public class FragmentMyOrder extends Fragment {
                     JsonObject jobj = gson.fromJson(response, JsonObject.class);
                     //JSONObject jObject = new JSONObject(String.valueOf(content));
                     String status = jobj.get("status").toString().replaceAll("\"", "");
+                    int status_int=Integer.parseInt(status);
                     String message = jobj.get("message").toString().replaceAll("\"", "");
                     String cancellation_policy = jobj.get("cancellation_policy").toString().replaceAll("\"", "");
+                    if (status_int==1 ) {
+
+                        Log.d("TAG", "status :\t" + status);
+                        Log.d("TAG", "message :\t" + message);
+
+                        //   JsonObject jsonObject = jobj.getAsJsonObject("info");
+
+                        JsonArray jsonArray = jobj.getAsJsonArray("info");
+                        for (int i = 0; i < jsonArray.size(); i++) {
+
+                            JsonObject jObject = (JsonObject) jsonArray.get(i);
+
+                            String id = jObject.get("id").toString().replaceAll("\"", "");
+                            String name = jObject.get("name").toString().replaceAll("\"", "");
+                            String image = jObject.get("image").toString().replaceAll("\"", "");
+                            String shop_name = jObject.get("shop_name").toString().replaceAll("\"", "");
+                            String instruction = jObject.get("instruction").toString().replaceAll("\"", "");
+                            String address = jObject.get("address").toString().replaceAll("\"", "");
+                            String customer_id = jObject.get("customer_id").toString().replaceAll("\"", "");
+                            String deliveryboy_id = jObject.get("deliveryboy_id").toString().replaceAll("\"", "");
+                            String product_type = jObject.get("product_type").toString().replaceAll("\"", "");
+                            String product_quantity = jObject.get("product_quantity").toString().replaceAll("\"", "");
+                            String product_price = jObject.get("product_price").toString().replaceAll("\"", "");
+                            String order_placed_on = jObject.get("order_placed_on").toString().replaceAll("\"", "");
+                            String latitute = jObject.get("latitute").toString().replaceAll("\"", "");
+                            String longitude = jObject.get("longitude").toString().replaceAll("\"", "");
+                            String shop_address = jObject.get("shop_address").toString().replaceAll("\"", "");
+                            String shop_latitude = jObject.get("shop_latitude").toString().replaceAll("\"", "");
+                            String shop_longitude = jObject.get("shop_longitude").toString().replaceAll("\"", "");
+                            String status1 = jObject.get("status").toString().replaceAll("\"", "");
+                            String job_status = jObject.get("job_status").toString().replaceAll("\"", "");
+                            String is_request_for_money = jObject.get("is_request_for_money").toString().replaceAll("\"", "");
 
 
-                    Log.d("TAG", "status :\t" + status);
-                    Log.d("TAG", "message :\t" + message);
+                            HashMap<String, String> map = new HashMap<>();
+                            map.put("id", id);
+                            map.put("name", name);
+                            map.put("image", image);
+                            map.put("shop_name", shop_name);
+                            map.put("instruction", instruction);
+                            map.put("address", address);
+                            map.put("customer_id", customer_id);
+                            map.put("order_placed_on", order_placed_on);
+                            map.put("deliveryboy_id", deliveryboy_id);
+                            map.put("product_type", product_type);
+                            map.put("product_quantity", product_quantity);
+                            map.put("product_price", product_price);
+                            map.put("latitute", latitute);
+                            map.put("longitude", longitude);
+                            map.put("shop_address", shop_address);
+                            map.put("shop_latitude", shop_latitude);
+                            map.put("shop_longitude", shop_longitude);
+                            map.put("status1", status1);
+                            map.put("job_status", job_status);
+                            map.put("is_request_for_money", is_request_for_money);
 
-                 //   JsonObject jsonObject = jobj.getAsJsonObject("info");
+                            arr_recent_order.add(map);
 
-                    JsonArray jsonArray =jobj.getAsJsonArray("info");
-                    for(int i=0; i<jsonArray.size();i++) {
+                        }
 
-                        JsonObject jObject = (JsonObject) jsonArray.get(i);
-
-                        String id = jObject.get("id").toString().replaceAll("\"", "");
-                        String name = jObject.get("name").toString().replaceAll("\"", "");
-                        String image = jObject.get("image").toString().replaceAll("\"", "");
-                        String shop_name = jObject.get("shop_name").toString().replaceAll("\"", "");
-                        String instruction = jObject.get("instruction").toString().replaceAll("\"", "");
-                        String address = jObject.get("address").toString().replaceAll("\"", "");
-                        String customer_id = jObject.get("customer_id").toString().replaceAll("\"", "");
-                        String deliveryboy_id = jObject.get("deliveryboy_id").toString().replaceAll("\"", "");
-                        String product_type = jObject.get("product_type").toString().replaceAll("\"", "");
-                        String product_quantity = jObject.get("product_quantity").toString().replaceAll("\"", "");
-                        String product_price = jObject.get("product_price").toString().replaceAll("\"", "");
-                        String order_placed_on = jObject.get("order_placed_on").toString().replaceAll("\"", "");
-                        String latitute = jObject.get("latitute").toString().replaceAll("\"", "");
-                        String longitude = jObject.get("longitude").toString().replaceAll("\"", "");
-                        String shop_address = jObject.get("shop_address").toString().replaceAll("\"", "");
-                        String shop_latitude = jObject.get("shop_latitude").toString().replaceAll("\"", "");
-                        String shop_longitude = jObject.get("shop_longitude").toString().replaceAll("\"", "");
-                        String status1 = jObject.get("status").toString().replaceAll("\"", "");
-                        String job_status = jObject.get("job_status").toString().replaceAll("\"", "");
-                        String is_request_for_money = jObject.get("is_request_for_money").toString().replaceAll("\"", "");
-
-
-                        HashMap<String, String> map = new HashMap<>();
-                        map.put("id", id);
-                        map.put("name", name);
-                        map.put("image", image);
-                        map.put("shop_name", shop_name);
-                        map.put("instruction", instruction);
-                        map.put("address", address);
-                        map.put("customer_id", customer_id);
-                        map.put("order_placed_on", order_placed_on);
-                        map.put("deliveryboy_id", deliveryboy_id);
-                        map.put("product_type", product_type);
-                        map.put("product_quantity", product_quantity);
-                        map.put("product_price", product_price);
-                        map.put("latitute", latitute);
-                        map.put("longitude", longitude);
-                        map.put("shop_address", shop_address);
-                        map.put("shop_latitude", shop_latitude);
-                        map.put("shop_longitude", shop_longitude);
-                        map.put("status1", status1);
-                        map.put("job_status", job_status);
-                        map.put("is_request_for_money", is_request_for_money);
-
-                        arr_recent_order.add(map);
-
+                        AdapterRecentOrder adapterRecentOrder = new AdapterRecentOrder(getActivity(), arr_recent_order, pd,
+                                lv_recent_order, cancellation_policy);
+                        lv_recent_order.setAdapter(adapterRecentOrder);
+                        adapterRecentOrder.notifyDataSetChanged();
+                        pd.dismiss();
                     }
-
-                    AdapterRecentOrder adapterRecentOrder = new AdapterRecentOrder(getActivity(),arr_recent_order,pd,
-                            lv_recent_order,cancellation_policy);
-                    lv_recent_order.setAdapter(adapterRecentOrder);
-                    adapterRecentOrder.notifyDataSetChanged();
-                    pd.dismiss();
-
+                    else if(status_int==2){
+                        Toasty.info(getActivity(),"Order not confirmed by Admin",Toast.LENGTH_SHORT, true).show();
+                        pd.dismiss();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

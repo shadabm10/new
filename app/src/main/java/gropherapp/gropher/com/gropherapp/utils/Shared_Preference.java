@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import static android.content.ContentValues.TAG;
+
 
 public class Shared_Preference {
     private Context context;
@@ -112,9 +114,9 @@ public class Shared_Preference {
             pref_ship_full_address = globalclass.getShipping_full_address();
             editor.putString(PREF_ship_full_address, pref_ship_full_address);
 
-            wallet = globalclass.getWallet_balance();
-            editor.putString(PREF_wallet, wallet);
-
+           // wallet = globalclass.getWallet_balance();
+           // editor.putString(PREF_wallet, wallet);
+          //  Log.d(TAG, "Wallet in: "+globalclass.getWallet_balance());
 
             editor.commit();
 
@@ -126,6 +128,13 @@ public class Shared_Preference {
         }
 
     }
+
+    public void setWallet(String wallet){
+        editor.putString(PREF_wallet, wallet);
+        editor.commit();
+        Log.d(TAG, "Wallet in: "+globalclass.getWallet_balance());
+    }
+
 
     public void loadPrefrence() {
         pref_logInStatus = sharedPreferences.getBoolean(PREF_logInStatus, false);
@@ -167,7 +176,7 @@ public class Shared_Preference {
 
             wallet=sharedPreferences.getString(PREF_wallet,"");
             globalclass.setWallet_balance(wallet);
-
+            Log.d(TAG, "Wallet: "+globalclass.getWallet_balance());
 
             login_from=sharedPreferences.getString(PREF_login_from,"");
             globalclass.setLogin_from(login_from);

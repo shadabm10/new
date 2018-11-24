@@ -641,7 +641,7 @@ public class PlaceOrder extends AppCompatActivity{
                             String order_id = response.getString("order_id");
                             String otp = response.getString("otp");
 
-
+                            Log.d(TAG, "Order id: "+order_id);
                             alert_for_otp(otp,order_id);
 
 

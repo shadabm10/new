@@ -14,6 +14,7 @@
     <string name="profile_updated">Your profile  has been updated.</string>
     <string name="check_internet">Please check your internet connection.</string>
     <string name="done">Done</string>
+    <string name="banner_text">Facilitating Connections for Delivery\nTogether we can Gopher anything</string>
 
 
     <string name="enable_gps">Your GPS seems to be disabled, do you want to enable it?</string>

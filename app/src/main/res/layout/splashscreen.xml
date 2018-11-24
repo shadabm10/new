@@ -34,7 +34,7 @@
             android:gravity="center"
             android:paddingBottom="20dp"
             android:layout_alignParentBottom="true"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit,dolor sit amet,"/>
+            android:text="@string/banner_text"/>
 
     </RelativeLayout>
 

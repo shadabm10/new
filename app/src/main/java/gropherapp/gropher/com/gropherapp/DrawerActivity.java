@@ -35,6 +35,9 @@ import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -81,14 +84,22 @@ public class DrawerActivity extends AppCompatActivity {
     String m_name;
     String video_type;
     ArrayList<String> participants = new ArrayList<>();
-    String VIDEO_ID;
+    String VIDEO_ID,payment_detail,payment_amount;
+    JSONObject response;
+    String total_pyment;
+    double value;
+    double  payment_amt;
     int frag ;
     TextView tv_update_bal;
     String k_stat;
+    double New_value;
+    Double wallet_amount=0.0;
     String fcm_reg_token="not found";
+    String total_wallet_amount;
     String fcm_reg_token_temp;
     String device_id;
     GlobalClass globalClass;
+    double NewVal;
     Shared_Preference prefrence;
     ProgressDialog pd;
   /*  ImageLoader loader;
@@ -143,13 +154,82 @@ public class DrawerActivity extends AppCompatActivity {
         View head=navigationView.getHeaderView(0);
         tv_wallet_balance = head.findViewById(R.id.tv_wallet_balance);
         tv_update_bal = head.findViewById(R.id.tv_update_bal);
+        payment_detail=getIntent().getStringExtra("PaymentDetails");
+        payment_amount=getIntent().getStringExtra("PaymentAmount");
+        Log.d(TAG, "onCreate: "+globalClass.getWallet_balance());
+        if(!globalClass.getWallet_balance().equals("0.0")){
+            tv_wallet_balance.setText(globalClass.getWallet_balance());
+        }
+        else {
+            tv_wallet_balance.setText("$"+"0.0");
+
+        }
 
 
+        if(payment_amount==null){
+
+
+            payment_amt=0.0;
+            payment_amount="0.0";
+            globalClass.setWallet_balance(String.valueOf(payment_amt));
+            prefrence.savePrefrence();
+        }
+        else{
+            if(globalClass.getWallet_balance().equals("0.0")){
+                payment_amt=0.0;
+                value = Double.parseDouble(payment_amount);
+               // Log.d(TAG, "value: "+value);
+                New_value=payment_amt+value;
+                globalClass.setWallet_balance(String.valueOf(New_value));
+
+                prefrence.savePrefrence();
+                tv_wallet_balance.setText(String.valueOf(New_value));
+                prefrence.setWallet(String.valueOf(New_value));
+            }
+            else{
+                prefrence.loadPrefrence();
+               // double AText = ParseDouble(angleAField.getText());
+                NewVal = ParseDouble(globalClass.getWallet_balance());
+                Log.d(TAG, "NEW VAL: "+NewVal);
+                value = Double.parseDouble(payment_amount);
+
+                New_value= NewVal+value;
+                Log.d(TAG, "value: "+value);
+                Log.d(TAG, "New Value inside: "+New_value);
+                globalClass.setWallet_balance(String.valueOf(New_value));
+                prefrence.savePrefrence();
+                prefrence.setWallet(String.valueOf(New_value));
+            }
+
+            tv_wallet_balance.setText(String.valueOf(New_value));
+           // add_to_wallet_url();
+            Log.d(TAG, "New Value: "+New_value);
+         /*   globalClass.setWallet_balance(String.valueOf(total_wallet_amount));
+
+            tv_wallet_balance.setText("$ "+globalClass.getWallet_balance());*/
+        }
+
+        //
+        Log.d(TAG, "Payment Amount: "+payment_amount);
+
+
+       /* try {
+            JSONObject jsonDetails = new JSONObject(intent.getStringExtra("PaymentDetails"));
+            Log.d(TAG, "jsonDetails: " +jsonDetails);
+            //Displaying payment details
+            response=jsonDetails.getJSONObject("response");
+            total_pyment=intent.getStringExtra("PaymentAmount");
+            Log.d(TAG, "Response: "+response + total_pyment);
+
+        } catch (JSONException e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }*/
+/*
         if(globalClass.getWallet_balance().isEmpty()||globalClass.getWallet_balance().equals("")){
             tv_wallet_balance.setText("$ 0");
-        }else {
-            tv_wallet_balance.setText("$ "+globalClass.getWallet_balance());
-        }
+        }else {*/
+
+       // }
 
         tv_update_bal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -222,6 +302,16 @@ public class DrawerActivity extends AppCompatActivity {
 
     }
 
+    double ParseDouble(String strNumber) {
+        if (strNumber != null && strNumber.length() > 0) {
+            try {
+                return Double.parseDouble(strNumber);
+            } catch(Exception e) {
+                return -1;   // or some value to mark this field is wrong. or make a function validates field first ...
+            }
+        }
+        else return 0;
+    }
 
 
 
@@ -399,6 +489,8 @@ public class DrawerActivity extends AppCompatActivity {
 
         //  show_chat();
         super.onResume();
+        prefrence.loadPrefrence();
+
         //  startService(new  Intent(this, Service_class.class));
 
         //Log.d("kite", "onResume: ");
@@ -539,6 +631,92 @@ public class DrawerActivity extends AppCompatActivity {
 
 
     }
+/*
+    private void add_to_wallet_url() {
+        // Tag used to cancel the request
+        String tag_string_req = "req_login";
+        pd.show();
+
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                WebserviceUrl.add_to_wallet, new Response.Listener<String>() {
+
+
+            @Override
+            public void onResponse(String response) {
+                Log.d(TAG, "url_hit: " + WebserviceUrl.add_to_wallet);
+                Log.d(TAG, "Response: " + response);
+
+                Gson gson = new Gson();
+
+                try {
+
+
+                    JsonObject jobj = gson.fromJson(response, JsonObject.class);
+                    //JSONObject jObject = new JSONObject(String.valueOf(content));
+                    String status = jobj.get("status").toString().replaceAll("\"", "");
+                    String message = jobj.get("message").toString().replaceAll("\"", "");
+
+
+                    Log.d("TAG", "status :\t" + status);
+                    Log.d("TAG", "message :\t" + message);
+
+                    if(status.equals("1")) {
+
+                        JsonObject jsonObject = jobj.getAsJsonObject("info");
+
+                        String id = jsonObject.get("id").toString().replaceAll("\"", "");
+                        String wallet_amount = jsonObject.get("wallet_amount").toString().replaceAll("\"", "");
+
+                        prefrence.setWallet(wallet_amount);
+
+                        prefrence.savePrefrence();
+
+
+                        Toasty.success(DrawerActivity.this, message, Toast.LENGTH_LONG).show();
+                    }else{
+                        Toasty.error(DrawerActivity.this, message, Toast.LENGTH_LONG).show();
+                    }
+
+                    pd.dismiss();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, "add_to_wallet Error: " + error.getMessage());
+                //  Toast.makeText(getActivity(), error.getMessage(), Toast.LENGTH_LONG).show();
+
+            }
+        }) {
+
+            @Override
+            protected Map<String, String> getParams() {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<String, String>();
+
+
+                params.put("wallet_amount", String.valueOf(New_value));
+                params.put("id",globalClass.getId() );
+
+                Log.d(TAG, "getParams: " + params);
+
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+        strReq.setRetryPolicy(new DefaultRetryPolicy(20 * 1000, 10, 1.0f));
+
+
+    }
+*/
+
 
     private void my_wallet_url() {
         // Tag used to cancel the request
@@ -586,7 +764,7 @@ public class DrawerActivity extends AppCompatActivity {
 
                      //   Toasty.success(DrawerActivity.this, message, Toast.LENGTH_LONG).show();
                     }else{
-                        Toasty.error(DrawerActivity.this, message, Toast.LENGTH_LONG).show();
+                        Toasty.warning(DrawerActivity.this, "Kindly Insert Amount to Wallet", Toast.LENGTH_LONG).show();
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
